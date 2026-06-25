@@ -1,4 +1,4 @@
-# DocAppoint — Server
+# DocAppoint (Server)
 
 Express.js backend for the DocAppoint doctor appointment booking system.
 
