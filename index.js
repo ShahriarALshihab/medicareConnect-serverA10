@@ -52,8 +52,8 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: "Something went wrong on the server" });
 });
 
-connectDB().then(() => {
-  app.listen(port, "0.0.0.0", () => {
-    console.log(` MediCare Connect server running on port ${port}`);
-  });
+app.listen(port, "0.0.0.0", () => {
+  console.log(`MediCare Connect server running on port ${port}`);
 });
+
+connectDB();
