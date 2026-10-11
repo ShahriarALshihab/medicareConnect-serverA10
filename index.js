@@ -21,14 +21,10 @@ const port = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://medicare-client-a10.vercel.app",
-    ],
+    origin: ["http://localhost:3000", "https://medicare-client-a10.vercel.app"],
     credentials: true,
-  })
+  }),
 );
-
 
 app.options("*", cors());
 
@@ -57,7 +53,7 @@ app.use((err, req, res, next) => {
 });
 
 connectDB().then(() => {
-  app.listen(port, () => {
+  app.listen(port, "0.0.0.0", () => {
     console.log(` MediCare Connect server running on port ${port}`);
   });
 });
