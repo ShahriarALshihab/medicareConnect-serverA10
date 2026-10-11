@@ -21,10 +21,16 @@ const port = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: true,
+    origin: [
+      "http://localhost:3000",
+      "https://medicare-client-a10.vercel.app",
+    ],
     credentials: true,
-  }),
+  })
 );
+
+
+app.options("*", cors());
 
 app.use(express.json());
 
