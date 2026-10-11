@@ -19,12 +19,23 @@ initFirebaseAdmin();
 const app = express();
 const port = process.env.PORT || 5000;
 
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://medicare-client-a10.vercel.app",
+  "https://medicare-client-a10-m9xd866mb.vercel.app",
+];
+
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://medicare-client-a10.vercel.app"],
+    origin: allowedOrigins,
     credentials: true,
-  }),
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
 );
+
 
 app.use(express.json());
 
