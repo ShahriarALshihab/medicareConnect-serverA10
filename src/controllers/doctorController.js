@@ -54,10 +54,33 @@ export const getFeaturedDoctors = async (req, res) => {
   res.send(doctors);
 };
 
+
 export const getDoctorById = async (req, res) => {
-  const doctor = await Doctor.findById(req.params.id);
-  if (!doctor) return res.status(404).send({ message: "Doctor not found" });
-  res.send(doctor);
+  try {
+    const { id } = req.params;
+
+    if (!/^[a-fA-F0-9]{24}$/.test(id)) {
+      return res.status(400).json({
+        message: "Invalid doctor ID",
+      });
+    }
+
+    const doctor = await Doctor.findById(id);
+
+    if (!doctor) {
+      return res.status(404).json({
+        message: "Doctor not found",
+      });
+    }
+
+    return res.status(200).json(doctor);
+  } catch (error) {
+    console.error("Error fetching doctor by ID:", error);
+
+    return res.status(500).json({
+      message: "Failed to fetch doctor details",
+    });
+  }
 };
 
 export const getDoctorByEmail = async (req, res) => {
